@@ -3,4 +3,9 @@ certificate_detection/augmented_dataset
 certificate_detection/Dataset
 certificate_detection/__pycache__
 similar_certificates/__pycache__
+<<<<<<< HEAD
 __pycache__
+=======
+__pycache__
+**/.DS_Store
+>>>>>>> e039d68 (agentic workflow)
