@@ -1,34 +1,34 @@
-import pytesseract
-import os
-from PIL import Image
-import cv2
-import numpy as np
+# import pytesseract
+# import os
+# from PIL import Image
+# import cv2
+# import numpy as np
 
-def ocr_checker(final_state):
-    ocr_results = {}
-    processed_folder = "./processed_certificates"
+# def ocr_checker(final_state):
+#     ocr_results = {}
+#     processed_folder = "./processed_certificates"
 
-    for file in final_state["accepted_certi"]:
-        if file.endswith(".png"):
-            img_path = os.path.join(processed_folder, file)
-            try:
-                # Basic pytesseract OCR
-                text = pytesseract.image_to_string(img_path, lang='eng')
-                ocr_results[file] = text.strip()
-            except Exception as e:
-                print(f"OCR failed for {file}: {e}")
-                # Fallback with image preprocessing
-                try:
-                    img = cv2.imread(img_path)
-                    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                    _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-                    text = pytesseract.image_to_string(thresh, config='--psm 6')
-                    ocr_results[file] = text.strip()
-                except:
-                    ocr_results[file] = "OCR_EXTRACTION_FAILED"
+#     for file in final_state["accepted_certi"]:
+#         if file.endswith(".png"):
+#             img_path = os.path.join(processed_folder, file)
+#             try:
+#                 # Basic pytesseract OCR
+#                 text = pytesseract.image_to_string(img_path, lang='eng')
+#                 ocr_results[file] = text.strip()
+#             except Exception as e:
+#                 print(f"OCR failed for {file}: {e}")
+#                 # Fallback with image preprocessing
+#                 try:
+#                     img = cv2.imread(img_path)
+#                     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+#                     _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+#                     text = pytesseract.image_to_string(thresh, config='--psm 6')
+#                     ocr_results[file] = text.strip()
+#                 except:
+#                     ocr_results[file] = "OCR_EXTRACTION_FAILED"
 
-    final_state["ocr_texts"] = ocr_results
-    return final_state
+#     final_state["ocr_texts"] = ocr_results
+#     return final_state
 
 
 
@@ -229,40 +229,40 @@ def ocr_checker(final_state):
 
 
 
-# import pytesseract
-# import os
-# from PIL import Image
-# import cv2
-# import numpy as np
+import pytesseract
+import os
+from PIL import Image
+import cv2
+import numpy as np
 
-# def ocr_checker(final_state):
-#     # Set tesseract path for Docker (it will be in /usr/bin/tesseract)
-#     pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+def ocr_checker(final_state):
+    # Set tesseract path for Docker (it will be in /usr/bin/tesseract)
+    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
     
-#     ocr_results = {}
-#     processed_folder = "./processed_certificates"
+    ocr_results = {}
+    processed_folder = "./processed_certificates"
 
-#     for file in final_state["accepted_certi"]:
-#         if file.endswith(".png"):
-#             img_path = os.path.join(processed_folder, file)
-#             try:
-#                 # Basic pytesseract OCR
-#                 text = pytesseract.image_to_string(img_path, lang='eng')
-#                 ocr_results[file] = text.strip()
-#                 print(f"✓ OCR success for {file}: {len(text.strip())} chars")
-#             except Exception as e:
-#                 print(f"OCR failed for {file}: {e}")
-#                 # Fallback with image preprocessing
-#                 try:
-#                     img = cv2.imread(img_path)
-#                     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-#                     _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-#                     text = pytesseract.image_to_string(thresh, config='--psm 6')
-#                     ocr_results[file] = text.strip()
-#                     print(f"✓ OCR success with preprocessing for {file}")
-#                 except:
-#                     ocr_results[file] = "OCR_EXTRACTION_FAILED"
-#                     print(f"❌ All OCR methods failed for {file}")
+    for file in final_state["accepted_certi"]:
+        if file.endswith(".png"):
+            img_path = os.path.join(processed_folder, file)
+            try:
+                # Basic pytesseract OCR
+                text = pytesseract.image_to_string(img_path, lang='eng')
+                ocr_results[file] = text.strip()
+                print(f"✓ OCR success for {file}: {len(text.strip())} chars")
+            except Exception as e:
+                print(f"OCR failed for {file}: {e}")
+                # Fallback with image preprocessing
+                try:
+                    img = cv2.imread(img_path)
+                    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                    _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+                    text = pytesseract.image_to_string(thresh, config='--psm 6')
+                    ocr_results[file] = text.strip()
+                    print(f"✓ OCR success with preprocessing for {file}")
+                except:
+                    ocr_results[file] = "OCR_EXTRACTION_FAILED"
+                    print(f"❌ All OCR methods failed for {file}")
 
-#     final_state["ocr_texts"] = ocr_results
-#     return final_state
+    final_state["ocr_texts"] = ocr_results
+    return final_state
