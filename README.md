@@ -4,7 +4,7 @@ VeriFy is a decentralized platform for secure certificate and document verificat
 
 ---
 
-## 🚀 Features
+##  Features
 
 ###  On-Chain Certificate Storage
 Certificate hashes are stored on the Ethereum blockchain, ensuring immutability and tamper-proof verification.
