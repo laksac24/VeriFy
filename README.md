@@ -83,3 +83,49 @@ VeriFy regenerates the hash and compares it with the on-chain record.
 ```bash
 git clone https://github.com/<your-username>/VeriFy.git
 cd VeriFy
+
+2. Install Frontend Dependencies
+cd client
+npm install
+
+3. Install Backend Dependencies
+cd server
+npm install
+
+4. Install OCR Dependencies
+pip install pytesseract
+
+5. Deploy Smart Contract
+npx hardhat run scripts/deploy.js --network <network-name>
+
+6. Start Frontend
+npm run dev
+
+7. Start Backend
+npm start
+
+Use Cases
+
+University marksheet & degree verification
+
+Hiring and background checks
+
+Government document authentication
+
+Online course certificate validation
+
+Hackathon and event certificate verification
+
+Vendor onboarding and KYC workflows
+
+Roadmap
+
+ IPFS file storage
+
+ Multi-signature issuer verification
+
+ Zero-knowledge proof privacy layer
+
+ Mobile app for QR scanning
+
+ Multi-chain support (Polygon, BNB Chain, Solana)
